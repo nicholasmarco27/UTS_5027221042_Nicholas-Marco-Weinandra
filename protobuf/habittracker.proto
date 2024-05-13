@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package protoapi;
+
+import "google/protobuf/Empty.proto";
+import "google/protobuf/Wrappers.proto";
+
+option go_package = "github.com/GabriellaErlinda/UTS_5027221018_Gabriella-Erlinda/common/habittracker";
+
+// entitas Habit
+message Habit {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message HabitList {
+    repeated Habit list = 1;
+}
+
+service HabitApi {
+    rpc CreateHabit(Habit) returns (Habit) {}
+    rpc ListHabits(google.protobuf.Empty) returns (HabitList) {}
+    rpc UpdateHabit(Habit) returns (Habit) {}
+    rpc DeleteHabit(google.protobuf.StringValue) returns (google.protobuf.BoolValue) {}
+}
