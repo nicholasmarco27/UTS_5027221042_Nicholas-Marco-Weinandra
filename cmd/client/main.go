@@ -211,25 +211,32 @@ var menusTemplate = `
 
 <body>
     <div class="container-fluid">
-		<div class="container text-center py-4" style="background-color: #FFE6E6;">
-			<h1 class="my-4">RESTAURANT MENU LIST</h1>
-			<form action="/create" method="post">
-				<div class="form-group">
-					<label for="title">Menu name:</label>
-					<input type="text" class="form-control" id="title" name="title">
-				</div>
-				<div class="form-group">
-					<label for="description">Price (Rpxx.xxx,-):</label>
-					<textarea class="form-control" id="description" name="description"></textarea>
-				</div>
-				<input type="submit" class="btn btn-info" value="Create Menu">
-			</form>
-			<hr>
-		</div>
+		<div class="container mt-5">
+   			 <div class="card mx-auto py-3 rounded" style="max-width: 500px; max-length: 800px;">
+        		<div class="card-header text-center bg-info text-white">
+            		<h1 class="my-4">RESTAURANT MENU LIST</h1>
+        		</div>
+        		<div class="card-body">
+            	<form action="/create" method="post">
+                <div class="form-group">
+                    <label for="title">Menu name:</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Price (Rpxx.xxx,-):</label>
+                    <textarea class="form-control" id="description" name="description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info btn-block">Create Menu</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
-        <h2 class="mb-4">Menu List</h2>
+
+
+        <h2 class="my-5 mx-auto">Menu List</h2>
         <div class="row">
             {{if not (eq (len .Menus) 0)}}
             {{range .Menus}}
