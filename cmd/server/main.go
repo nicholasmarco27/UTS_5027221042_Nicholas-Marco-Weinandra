@@ -8,9 +8,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/GabriellaErlinda/UTS_5027221018_Gabriella-Erlinda/common/genproto/habittracker"
-	"github.com/GabriellaErlinda/UTS_5027221018_Gabriella-Erlinda/common/repository"
-	"github.com/GabriellaErlinda/UTS_5027221018_Gabriella-Erlinda/common/service"
+	"github.com/nicholasmarco27/UTS_5027221042_Nicholas-Marco-Weinandra/common/genproto/menulist"
+	"github.com/nicholasmarco27/UTS_5027221042_Nicholas-Marco-Weinandra/common/repository"
+	"github.com/nicholasmarco27/UTS_5027221042_Nicholas-Marco-Weinandra/common/service"
 	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -60,9 +60,9 @@ func main() {
 
 	server := grpc.NewServer()
 
-	urepo := repository.NewHabitRepo(db)
-	usvc := service.NewHabitService(urepo)
-	habittracker.RegisterHabitApiServer(server, usvc)
+	urepo := repository.NewMenuRepo(db)
+	usvc := service.NewMenuService(urepo)
+	menulist.RegisterMenuApiServer(server, usvc)
 
 	port := ":" + viper.GetString("app.grpc.port")
 	listener, err := net.Listen("tcp", port)

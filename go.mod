@@ -1,4 +1,4 @@
-module github.com/GabriellaErlinda/UTS_5027221018_Gabriella-Erlinda
+module github.com/nicholasmarco27/UTS_5027221042_Nicholas-Marco-Weinandra
 
 go 1.22.0
 

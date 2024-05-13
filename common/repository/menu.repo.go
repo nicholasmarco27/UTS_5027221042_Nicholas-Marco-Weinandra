@@ -5,67 +5,67 @@ import (
 	"log"
 	"time"
 
-	"github.com/GabriellaErlinda/UTS_5027221018_Gabriella-Erlinda/common/model"
+	"github.com/nicholasmarco27/UTS_5027221042_Nicholas-Marco-Weinandra/common/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type HabitRepository struct {
+type MenuRepository struct {
 	db  *mongo.Database
 	col *mongo.Collection
 }
 
-func NewHabitRepo(db *mongo.Database) *HabitRepository {
-	return &HabitRepository {
+func NewMenuRepo(db *mongo.Database) *MenuRepository {
+	return &MenuRepository {
 		db: db,
-		col: db.Collection(model.HabitCollection),
+		col: db.Collection(model.MenuCollection),
 	}
 }
 
-// Save habit
-func (r *HabitRepository) Save(u *model.Habit) (model.Habit, error) {
+// Save menu
+func (r *MenuRepository) Save(u *model.Menu) (model.Menu, error) {
 	log.Printf("Save(%v) \n", u)
 	ctx, cancel := timeoutContext()
 	defer cancel()
 
-	var habit model.Habit
+	var menu model.Menu
 	res, err := r.col.InsertOne(ctx, u)
 	if err != nil {
 		log.Println(err)
-		return habit, err
+		return menu, err
 	}
 
-	err = r.col.FindOne(ctx, bson.M{"_id": res.InsertedID}).Decode(&habit)
+	err = r.col.FindOne(ctx, bson.M{"_id": res.InsertedID}).Decode(&menu)
 	if err != nil {
 		log.Println(err)
-		return habit, err
+		return menu, err
 	}
 
-	return habit, nil
+	return menu, nil
 }
 
-// find all habits
-func (r *HabitRepository) FindAll() ([]model.Habit, error) {
+// find all menus
+func (r *MenuRepository) FindAll() ([]model.Menu, error) {
 	log.Println("FindAll()")
 	ctx, cancel := timeoutContext()
 	defer cancel()
 
-	var habits []model.Habit
+	var menus []model.Menu
 	cur, err := r.col.Find(ctx, bson.M{})
 	if err != nil {
 		log.Println(err)
-		return habits, err
+		return menus, err
 	}
 
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
-		var habit model.Habit
-		err := cur.Decode(&habit)
+		var menu model.Menu
+		err := cur.Decode(&menu)
 		if err != nil {
 			log.Println(err)
 		}
-		habits = append(habits, habit)
+		menus = append(menus, menu)
 	}
 
 	if err := cur.Err(); err != nil {
@@ -73,11 +73,11 @@ func (r *HabitRepository) FindAll() ([]model.Habit, error) {
 		return nil, err
 	}
 
-	return habits, nil
+	return menus, nil
 }
 
-// update habit 
-func (r *HabitRepository) Update(u *model.Habit) (model.Habit, error) {
+// update menu 
+func (r *MenuRepository) Update(u *model.Menu) (model.Menu, error) {
 	log.Printf("Update(%v) \n", u)
 	ctx, cancel := timeoutContext()
 	defer cancel()
@@ -90,30 +90,30 @@ func (r *HabitRepository) Update(u *model.Habit) (model.Habit, error) {
 		},
 	}
 
-	var habit model.Habit
-	err := r.col.FindOneAndUpdate(ctx, filter, update).Decode(&habit)
+	var menu model.Menu
+	err := r.col.FindOneAndUpdate(ctx, filter, update).Decode(&menu)
 	if err != nil {
 		log.Printf("ERR 115 %v", err)
-		return habit, err
+		return menu, err
 	}
 
-	return habit, nil
+	return menu, nil
 }
 
-// delete habit by id
-func (r  *HabitRepository) Delete(id string) (bool, error) {
+// delete menu by id
+func (r  *MenuRepository) Delete(id string) (bool, error) {
 	log.Printf("Delete(%s) \n", id)
 	ctx, cancel := timeoutContext()
 	defer cancel()
 
-	var habit model.Habit
+	var menu model.Menu
 	oid, _ := primitive.ObjectIDFromHex(id)
-	err := r.col.FindOneAndDelete(ctx, bson.M{"_id": oid}).Decode(&habit)
+	err := r.col.FindOneAndDelete(ctx, bson.M{"_id": oid}).Decode(&menu)
 	if err != nil {
-		log.Printf("Fail to delete habit: %v \n", err)
+		log.Printf("Fail to delete menu: %v \n", err)
 		return false, err
 	}
-	log.Printf("Deleted_habit(%v) \n", habit)
+	log.Printf("Deleted_menu(%v) \n", menu)
 	return true, nil
 }
 

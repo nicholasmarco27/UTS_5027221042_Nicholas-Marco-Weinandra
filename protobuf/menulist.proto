@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package protoapi;
+
+import "google/protobuf/Empty.proto";
+import "google/protobuf/Wrappers.proto";
+
+option go_package = "github.com/nicholasmarco27/UTS_5027221042_Nicholas-Marco-Weinandra/common/menulist";
+
+// entitas Menu
+message Menu {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message MenuList {
+    repeated Menu list = 1;
+}
+
+service MenuApi {
+    rpc CreateMenu(Menu) returns (Menu) {}
+    rpc ListMenus(google.protobuf.Empty) returns (MenuList) {}
+    rpc UpdateMenu(Menu) returns (Menu) {}
+    rpc DeleteMenu(google.protobuf.StringValue) returns (google.protobuf.BoolValue) {}
+}

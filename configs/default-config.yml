@@ -2,5 +2,5 @@ app:
   grpc:
     port: 7070
   mongodb:
-    uri: mongodb+srv://user_habit_tracker:habit_tracker@habit-tracker.5rg28ay.mongodb.net/
-    database: habit-tracker
+    uri: mongodb+srv://ets_5027221042:ets_5027221042@ets.d5prvjf.mongodb.net/?retryWrites=true&w=majority&appName=ets
+    database: menudb

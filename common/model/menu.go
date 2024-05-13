@@ -5,10 +5,10 @@ import (
 )
 
 //
-const HabitCollection = "habit"
+const MenuCollection = "menu"
 
 //
-type Habit struct {
+type Menu struct {
 	ID			primitive.ObjectID	`bson:"_id,omitempty"`
 	Title		string				`bson:"title"`
 	Description	string        		`bson:"description"`
