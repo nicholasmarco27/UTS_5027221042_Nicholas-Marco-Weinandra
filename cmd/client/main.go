@@ -72,7 +72,7 @@ func (s *httpServer) handleCreate(w http.ResponseWriter, r *http.Request) {
 	}
 	defer client.Close()
 
-	// Membuat klien API tugas
+	// Membuat klien API
 	menuClient := menulist.NewMenuApiClient(client)
 
 	// Membuat menu baru
@@ -104,7 +104,7 @@ func (s *httpServer) handleUpdate(w http.ResponseWriter, r *http.Request) {
 	}
 	defer client.Close()
 
-	// Membuat klien API tugas
+	// Membuat klien API menu
 	menuClient := menulist.NewMenuApiClient(client)
 
 	// Update menu
@@ -118,7 +118,7 @@ func (s *httpServer) handleUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Tetapkan pengalihan arahan ke halaman list
+	// Tetapkan pengalihan arahan ke halaman menu
 	http.Redirect(w, r, "/list", http.StatusSeeOther)
 }
 
@@ -135,7 +135,7 @@ func (s *httpServer) handleDelete(w http.ResponseWriter, r *http.Request) {
 	}
 	defer client.Close()
 
-	// Membuat klien API tugas
+	// Membuat klien API menu
 	menuClient := menulist.NewMenuApiClient(client)
 
 	// Menghapus menu
@@ -236,7 +236,7 @@ var menusTemplate = `
 
 
 
-        <h2 class="my-5 mx-auto">Menu List</h2>
+        <h2 class="my-5 mx-auto"></h2>
         <div class="row">
             {{if not (eq (len .Menus) 0)}}
             {{range .Menus}}
